@@ -1,6 +1,21 @@
-// Save data inside the java script: 
+/*
+
+Challenge: 
+We'll create the 'Added' message. 
+The HTML element for this already exists: 
+<div class="added-to-cart">
+However, in the CSS, this element has opacity: 0 (it's invisible).
+
+
+13i-challenge: Add a unique class to this element (like we did in exercise 13b) 
+to indentify which product it is for: 
+*/
+import {cart} from '../data/cart.js';
 
 let productsHTML = '';
+
+// variable for 'added-to-cart'
+let timeout;
 
 products.forEach((product) => {
     productsHTML += `
@@ -42,8 +57,8 @@ products.forEach((product) => {
             </div>
 
             <div class="product-spacer"></div>
-
-            <div class="added-to-cart">
+        
+            <div class="added-to-cart js-added-to-cart-${product.id}">
                 <img src="images/icons/checkmark.png">
                 Added
             </div>
@@ -62,11 +77,47 @@ document.querySelector('.js-products-grid')
 document.querySelectorAll('.js-add-to-cart-button') 
     .forEach((button) => {
         button.addEventListener('click', () => {
+            // document.querySelector('.js-added-to-cart').style.opacity="1"; 
+            // setTimeout(() => {
+            //     addedToCartElement.classList.add('added-to-cart.style.opacity="1"');
+            // }, 2); 
+
+
             // 13h: in amazon.js: 
             // 1. Search for the code 'const productId = button.dataset.productId;'
             // and use the destructuring shortcut to simplify it:  
             const {productId} = button.dataset; 
 
+            // 13j-Challenge: When clicking 'Add to Cart', use the DOM to get the 'Added' message
+            // element for the product (like we did in the exercise 13c):
+            const addedToCartElement = document.querySelector(`.js-added-to-cart-${productId}`); 
+
+            if(addedToCartElement.classList.contains('added-to-cart-visible')) {
+                clearTimeout(timeout); 
+
+                // 13k-Challenge: Add a class to the message lement using .classList.add(). 
+                // Then, in style/pages/amazon.css, style this class so it has opacity: 1:
+                addedToCartElement.classList.add('added-to-cart-visible'); 
+
+                // 13l-Challenge: After 2 seconds (use setTimeout), make the message 
+                // disappear by removing the class:
+                timeout = setTimeout(() => {
+                    addedToCartElement.classList.remove('added-to-cart-visible'); 
+                }, 2000);
+            }
+            else {
+                // 13k-Challenge: Add a class to the message lement using .classList.add(). 
+                // Then, in style/pages/amazon.css, style this class so it has opacity: 1;
+                addedToCartElement.classList.add('added-to-cart-visible'); 
+
+                // 13l-Challenge: After 2 seconds (use setTimeout), make the message 
+                // disappear by removing the class:
+                timeout = setTimeout(() => {
+                    addedToCartElement.classList.remove('added-to-cart-visible');
+                }, 2000); 
+            }
+
+            
             // 13c: When clicking the 'Add to Cart' button, use the DOM 
             // to get the quantity selector (the <select> element) for the product.
             // Hint: use document.querySelector(`.js-quantity-selector-${productId}`):
