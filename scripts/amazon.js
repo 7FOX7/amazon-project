@@ -10,7 +10,7 @@ However, in the CSS, this element has opacity: 0 (it's invisible).
 13i-challenge: Add a unique class to this element (like we did in exercise 13b) 
 to indentify which product it is for: 
 */
-import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js'; 
 
 let productsHTML = '';
@@ -75,101 +75,43 @@ products.forEach((product) => {
 document.querySelector('.js-products-grid')
     .innerHTML = productsHTML; 
 
+// Update the cart quantity:
+function updateCartQuantity() {
+    let cartQuantity = 0; 
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;   
+    });
+
+    document.querySelector('.js-cart-quantity')
+        .innerHTML = cartQuantity;
+}
+
+// Makes the 'Added' icon pop up: 
+function displayAddedToCartIcon(productId) {
+    const addedToCartElement = document.querySelector(`.js-added-to-cart-${productId}`); 
+
+    if(addedToCartElement.classList.contains('added-to-cart-visible')) {
+        clearTimeout(timeout); 
+        addedToCartElement.classList.add('added-to-cart-visible'); 
+        timeout = setTimeout(() => {
+            addedToCartElement.classList.remove('added-to-cart-visible'); 
+        }, 2000);
+    }
+    else {
+        addedToCartElement.classList.add('added-to-cart-visible'); 
+        timeout = setTimeout(() => {
+            addedToCartElement.classList.remove('added-to-cart-visible');
+        }, 2000); 
+    }
+}
+
 document.querySelectorAll('.js-add-to-cart-button') 
     .forEach((button) => {
         button.addEventListener('click', () => {
-            // document.querySelector('.js-added-to-cart').style.opacity="1"; 
-            // setTimeout(() => {
-            //     addedToCartElement.classList.add('added-to-cart.style.opacity="1"');
-            // }, 2); 
-
-
-            // 13h: in amazon.js: 
-            // 1. Search for the code 'const productId = button.dataset.productId;'
-            // and use the destructuring shortcut to simplify it:  
             const {productId} = button.dataset; 
-
-            // 13j-Challenge: When clicking 'Add to Cart', use the DOM to get the 'Added' message
-            // element for the product (like we did in the exercise 13c):
-            const addedToCartElement = document.querySelector(`.js-added-to-cart-${productId}`); 
-
-            if(addedToCartElement.classList.contains('added-to-cart-visible')) {
-                clearTimeout(timeout); 
-
-                // 13k-Challenge: Add a class to the message lement using .classList.add(). 
-                // Then, in style/pages/amazon.css, style this class so it has opacity: 1:
-                addedToCartElement.classList.add('added-to-cart-visible'); 
-
-                // 13l-Challenge: After 2 seconds (use setTimeout), make the message 
-                // disappear by removing the class:
-                timeout = setTimeout(() => {
-                    addedToCartElement.classList.remove('added-to-cart-visible'); 
-                }, 2000);
-            }
-            else {
-                // 13k-Challenge: Add a class to the message lement using .classList.add(). 
-                // Then, in style/pages/amazon.css, style this class so it has opacity: 1;
-                addedToCartElement.classList.add('added-to-cart-visible'); 
-
-                // 13l-Challenge: After 2 seconds (use setTimeout), make the message 
-                // disappear by removing the class:
-                timeout = setTimeout(() => {
-                    addedToCartElement.classList.remove('added-to-cart-visible');
-                }, 2000); 
-            }
-
             
-            // 13c: When clicking the 'Add to Cart' button, use the DOM 
-            // to get the quantity selector (the <select> element) for the product.
-            // Hint: use document.querySelector(`.js-quantity-selector-${productId}`):
-            const selectorId = document.querySelector(`.js-quantity-selector-${productId}`); 
-
-            // 13d: Get the value selected in the quantity selector (to get the value out 
-            // of a <select> element, you can use the property '.value'): 
-            const cartValue = selectorId.value; 
- 
-            let matchingProduct; 
-
-            cart.forEach((product) => {
-                if(product.productId === productId) {
-                    matchingProduct = product;
-                }
-            });
-
-            if(matchingProduct) {
-                // 13e: When updating the cart, instead of using a quantity of 1 every time, 
-                // use the quantity that get from 13d.
-                // Hint: in order for the math to work properly, convert the value
-                // from 13d into a number first using Number()
-                // (since values we get from the DOM are strings by default):
-                matchingProduct.quantity += Number(cartValue); 
-            }
-
-            else {
-                cart.push({
-                    // 13h: in amazon.js: 
-                    // 1. Search for 'cart.push({'and use shorthand property in the 2 lines below this code'})
-                    productId, 
-
-                    // 13e: When updating the cart, instead of using a quantity of 1 every time, 
-                    // use the quantity that get from 13d.
-                    // Hint: in order for the math to work properly, convert the value
-                    // from 13d into a number first using Number()
-                    // (since values we get from the DOM are strings by default):
-                    quantity: Number(cartValue)
-                });    
-            }
-            
-            let cartQuantity = 0; 
-            cart.forEach((item) => {
-                cartQuantity += item.quantity;   
-            });
-
-            // console.log(cartQuantity); 
-            // console.log(cart); 
-
-            // console.log(`The value of in the cart is: ${cartValue}`);
-            document.querySelector('.js-cart-quantity')
-                .innerHTML = cartQuantity; 
+            displayAddedToCartIcon(productId); 
+            addToCart(productId); 
+            updateCartQuantity(); 
         });
     });
