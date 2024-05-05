@@ -62,7 +62,10 @@ document.querySelector('.js-products-grid')
 document.querySelectorAll('.js-add-to-cart-button') 
     .forEach((button) => {
         button.addEventListener('click', () => {
-            const productId = button.dataset.productId; 
+            // 13h: in amazon.js: 
+            // 1. Search for the code 'const productId = button.dataset.productId;'
+            // and use the destructuring shortcut to simplify it:  
+            const {productId} = button.dataset; 
 
             // 13c: When clicking the 'Add to Cart' button, use the DOM 
             // to get the quantity selector (the <select> element) for the product.
@@ -92,7 +95,9 @@ document.querySelectorAll('.js-add-to-cart-button')
 
             else {
                 cart.push({
-                    productId: productId, 
+                    // 13h: in amazon.js: 
+                    // 1. Search for 'cart.push({'and use shorthand property in the 2 lines below this code'})
+                    productId, 
 
                     // 13e: When updating the cart, instead of using a quantity of 1 every time, 
                     // use the quantity that get from 13d.

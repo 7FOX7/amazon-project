@@ -656,5 +656,43 @@ const products = [
       "apparel",
       "mens"
     ]
+  },
+
+  // 13g: We'll add some more products to the page. 
+  // 1. Inside data/products.js add some more objects to the array.
+  // 2. For the id, use any id that you want.
+  // 3. For the image, take any from the "images/products..." path
+  // 4. For the name, rating, and priceCents, use any values that you want. 
+  {
+    id: "ac2847e9-4444-403f-b7cf-57fde044a944",
+    image: "images/products/super-puper-boy.jpg",
+    name: "Warrior, Programmer, Hardworker, And Just a Cool Boy To Hang Out With",
+    rating: {
+      stars: 5, 
+      count: 5344
+    },
+    priceCents: 1000000,
+    keywords: [
+      "super",
+      "programmer", 
+      "boy", 
+      "mind",
+      "puper"
+    ]
+  },
+  {
+    id: "cc2847e9-4444-403f-b7cf-57fde044a955",
+    image: "images/products/backpack.jpg",
+    name: "Black Backpack",
+    rating: {
+      stars: 3.5, 
+      count: 43
+    },
+    priceCents: 2800,
+    kewords: [
+      "black", 
+      "backpack",
+      "school"
+    ]
   }
 ];
