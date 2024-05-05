@@ -11,6 +11,7 @@ However, in the CSS, this element has opacity: 0 (it's invisible).
 to indentify which product it is for: 
 */
 import {cart} from '../data/cart.js';
+import {products} from '../data/products.js'; 
 
 let productsHTML = '';
 
