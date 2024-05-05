@@ -27,7 +27,7 @@ products.forEach((product) => {
             </div>
 
             <div class="product-quantity-container">
-                <select>
+                <select class="js-quantity-selector-${product.id}">
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -55,6 +55,7 @@ products.forEach((product) => {
   `;
 });
 
+
 document.querySelector('.js-products-grid')
     .innerHTML = productsHTML; 
 
@@ -63,10 +64,16 @@ document.querySelectorAll('.js-add-to-cart-button')
         button.addEventListener('click', () => {
             const productId = button.dataset.productId; 
 
+            // 13c: When clicking the 'Add to Cart' button, use the DOM 
+            // to get the quantity selector (the <select> element) for the product.
+            // Hint: use document.querySelector(`.js-quantity-selector-${productId}`):
+            const selectorId = document.querySelector(`.js-quantity-selector-${productId}`); 
+
+            // 13d: Get the value selected in the quantity selector (to get the value out 
+            // of a <select> element, you can use the property '.value'): 
+            const cartValue = selectorId.value; 
+ 
             let matchingProduct; 
-            // if(cart.forEach(product => productName === product.productName)) {
-            //     matchingProduct = product; 
-            // };
 
             cart.forEach((product) => {
                 if(product.productId === productId) {
@@ -75,13 +82,24 @@ document.querySelectorAll('.js-add-to-cart-button')
             });
 
             if(matchingProduct) {
-                matchingProduct.quantity += 1; 
+                // 13e: When updating the cart, instead of using a quantity of 1 every time, 
+                // use the quantity that get from 13d.
+                // Hint: in order for the math to work properly, convert the value
+                // from 13d into a number first using Number()
+                // (since values we get from the DOM are strings by default):
+                matchingProduct.quantity += Number(cartValue); 
             }
 
             else {
                 cart.push({
                     productId: productId, 
-                    quantity: 1
+
+                    // 13e: When updating the cart, instead of using a quantity of 1 every time, 
+                    // use the quantity that get from 13d.
+                    // Hint: in order for the math to work properly, convert the value
+                    // from 13d into a number first using Number()
+                    // (since values we get from the DOM are strings by default):
+                    quantity: Number(cartValue)
                 });    
             }
             
@@ -93,6 +111,7 @@ document.querySelectorAll('.js-add-to-cart-button')
             // console.log(cartQuantity); 
             // console.log(cart); 
 
+            // console.log(`The value of in the cart is: ${cartValue}`);
             document.querySelector('.js-cart-quantity')
                 .innerHTML = cartQuantity; 
         });
