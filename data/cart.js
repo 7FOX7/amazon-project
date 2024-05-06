@@ -55,3 +55,23 @@ export function removeFromCart(productId) {
 
     saveToStorage(); 
 }
+
+
+/*
+14e: Inside the function updateCartQuantity, we have some code 
+that calculates the cart quantity (creates a variable, loops through the cart, and
+adds up all the quantities). Notice this code is repeated in checkout.js and amazon.js
+
+1. Create a function calculateCartQuantity() and move this code into the function so we can reuse it.
+2. Put calculateCartQuantity() inside cart.js (bacause this code relates to the cart)
+and use export/import to share it between the 2 files.  
+*/
+export function calculateCartQuantity() {
+    let cartQuantity = 0; 
+
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+
+    return cartQuantity; 
+}

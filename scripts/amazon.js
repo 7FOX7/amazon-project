@@ -1,16 +1,4 @@
-/*
-
-Challenge: 
-We'll create the 'Added' message. 
-The HTML element for this already exists: 
-<div class="added-to-cart">
-However, in the CSS, this element has opacity: 0 (it's invisible).
-
-
-13i-challenge: Add a unique class to this element (like we did in exercise 13b) 
-to indentify which product it is for: 
-*/
-import {cart, addToCart} from '../data/cart.js';
+import {cart, addToCart, calculateCartQuantity} from '../data/cart.js';
 import {products} from '../data/products.js'; 
 import {formatCurrency} from './utils/money.js';
 
@@ -72,20 +60,13 @@ products.forEach((product) => {
   `;
 });
 
-updateCartQuantity(); 
+// updateCartQuantity(); 
+document.querySelector('.js-cart-quantity')
+    .innerHTML = calculateCartQuantity(); 
+
 document.querySelector('.js-products-grid')
     .innerHTML = productsHTML; 
 
-// Update the cart quantity:
-function updateCartQuantity() {
-    let cartQuantity = 0; 
-    cart.forEach((cartItem) => {
-        cartQuantity += cartItem.quantity;   
-    });
-
-    document.querySelector('.js-cart-quantity')
-        .innerHTML = cartQuantity;
-}
 
 // Makes the 'Added' icon pop up: 
 function displayAddedToCartIcon(productId) {
@@ -113,6 +94,20 @@ document.querySelectorAll('.js-add-to-cart-button')
             
             displayAddedToCartIcon(productId); 
             addToCart(productId); 
-            updateCartQuantity(); 
+            // updateCartQuantity();
+            document.querySelector('.js-cart-quantity')
+                .innerHTML = calculateCartQuantity();  
         });
     });
+
+
+// Update the cart quantity:
+// function updateCartQuantity() {
+//     let cartQuantity = 0; 
+//     cart.forEach((cartItem) => {
+//         cartQuantity += cartItem.quantity;   
+//     });
+
+//     document.querySelector('.js-cart-quantity')
+//         .innerHTML = cartQuantity;
+// }
