@@ -114,3 +114,20 @@ document.querySelectorAll('.js-delete-link')
             container.remove();  
         });
     });
+
+// 14b: In checkout.js, when the page loads, calculate the actual quantity of products
+// in the cart, and display it in the header: `${quantity} items`
+// Hints: 
+
+// 1. In amazon.js, inside the function updateCartQuantity(), we wrote 
+// some code to calculate teh cart quantity. Reuse this code. 
+// 2. In checkout.html, you'll need to add a class to the element so you 
+// can select it with the DOM and change the innerHTML:
+let quantity = 0; 
+
+cart.forEach((cartItem) => {
+  quantity += cartItem.quantity; 
+}); 
+
+document.querySelector('.js-return-to-home-link')
+  .innerHTML = quantity; 
