@@ -192,7 +192,13 @@ document.querySelectorAll('.js-save-quantity-link')
 
         const newQuantity = Number(inputQuantityElement.value);  
 
-        updateQuantity(productId, newQuantity);
+        if(newQuantity >= 15) {
+          alert('You cannot put to the cart more than 15 of the same item!');
+          return; 
+        }
+        else {
+          updateQuantity(productId, newQuantity);
+        }
         document.querySelector('.js-return-to-home-link')
             .innerHTML = calculateCartQuantity(); 
 
