@@ -56,7 +56,17 @@ export function removeFromCart(productId) {
     saveToStorage(); 
 }
 
+export function updateQuantity(productId, newQuantity) {
+    let matchingProduct = ''; 
+    cart.forEach((cartItem) => {
+        if(cartItem.productId === productId) {
+            matchingProduct = cartItem; 
+            matchingProduct.quantity = newQuantity; 
+        }
+    });
 
+    saveToStorage(); 
+}
 /*
 14e: Inside the function updateCartQuantity, we have some code 
 that calculates the cart quantity (creates a variable, loops through the cart, and
