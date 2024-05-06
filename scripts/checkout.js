@@ -112,6 +112,7 @@ document.querySelectorAll('.js-delete-link')
             );
 
             container.remove();  
+            updateCartQuantity(); 
         });
     });
 
@@ -123,11 +124,24 @@ document.querySelectorAll('.js-delete-link')
 // some code to calculate teh cart quantity. Reuse this code. 
 // 2. In checkout.html, you'll need to add a class to the element so you 
 // can select it with the DOM and change the innerHTML:
-let quantity = 0; 
 
-cart.forEach((cartItem) => {
-  quantity += cartItem.quantity; 
-}); 
 
-document.querySelector('.js-return-to-home-link')
-  .innerHTML = quantity; 
+// 14c: Continuing from 14b, also calculate and display the quantity in the 
+// header when clicking 'delete'.
+
+// 1. First, create a function updateCartQuantity() and put
+// the code from 14b inside. 
+// 2. Run this function when loading the page and when clicking delete (notice that this function
+// doesn't conflict with updateCartQuantity() in amazon.js because we're using modules):
+function updateCartQuantity() {
+  let quantity = 0; 
+
+  cart.forEach((cartItem) => {
+    quantity += cartItem.quantity; 
+  }); 
+
+  document.querySelector('.js-return-to-home-link')
+    .innerHTML = quantity; 
+}
+
+updateCartQuantity(); 
