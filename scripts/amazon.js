@@ -52,7 +52,7 @@ products.forEach((product) => {
                 <img src="images/icons/checkmark.png">
                 Added
             </div>
-
+            <!-- product.id = id of the product that we get by looping through the array 'products' -->
             <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${product.id}">
                 Add to Cart
             </button>
