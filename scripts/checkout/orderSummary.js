@@ -50,12 +50,12 @@ update the quantity in the HTML. Update these 2 places:
 */
 
 import {cart, removeFromCart, calculateCartQuantity, updateQuantity, updateDeliveryOption} from '../../data/cart.js';
-import {products} from '../../data/products.js';
+import {products, getProduct} from '../../data/products.js';
 //import {formatCurrency} from './utils/money.js';
 import formatCurrency from '../utils/money.js'; 
 import {hello} from 'https://unpkg.com/supersimpledev@1.0.1/hello.esm.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
-import {deliveryOptions} from '../../data/deliveryOptions.js';
+import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 
 hello(); 
 const today = dayjs(); 
@@ -69,28 +69,11 @@ export function renderOrderSummary() {
   cart.forEach((cartItem) => {
       const productId = cartItem.productId; 
 
-      let matchingProduct; 
-
-      // We loop through each product inside 
-      // 'products' array: 
-      products.forEach((product) => {
-          // if any product from the array has the same id
-          // as the product from the cart, then assign a variable
-          // matching product to that product. 
-          if(product.id === productId) {
-              matchingProduct = product; 
-          }
-      });
+      const matchingProduct = getProduct(productId); 
 
       const deliveryOptionId = cartItem.deliveryOptionId;
-      let deliveryOption;
-      
-      deliveryOptions.forEach((option) => {
-        if(option.id === deliveryOptionId) {
-          deliveryOption = option; 
-        }
-      });
 
+      const deliveryOption = getDeliveryOption(deliveryOptionId); 
       const today = dayjs();
       const deliveryDate = today.add(
         deliveryOption.deliveryDays,

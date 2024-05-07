@@ -1,3 +1,20 @@
+export function getProduct(productId) {
+  let matchingProduct; 
+
+      // We loop through each product inside 
+      // 'products' array: 
+      products.forEach((product) => {
+          // if any product from the array has the same id
+          // as the product from the cart, then assign a variable
+          // matching product to that product. 
+          if(product.id === productId) {
+              matchingProduct = product; 
+          }
+      });
+
+  return matchingProduct; 
+}
+
 export const products = [
   {
     id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
