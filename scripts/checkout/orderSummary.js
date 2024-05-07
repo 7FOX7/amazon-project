@@ -4,6 +4,7 @@ import formatCurrency from '../utils/money.js';
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import {deliveryOptions, getDeliveryOption} from '../../data/deliveryOptions.js';
 import {renderPaymentSummary} from './paymentSummary.js';
+import { renderCheckoutHeader } from './checkoutHeader.js';
 
 
 export function renderOrderSummary() {
@@ -118,9 +119,9 @@ export function renderOrderSummary() {
               removeFromCart(productId); 
 
               
-              document.querySelector('.js-return-to-home-link')
-                .innerHTML = calculateCartQuantity(); 
-
+              // document.querySelector('.js-return-to-home-link')
+              //   .innerHTML = calculateCartQuantity(); 
+              renderCheckoutHeader(); 
               renderOrderSummary(); 
               // 15h: When deleting a product from the cart, instead of using the DOM
               // and updating the page directly with .delete(), regenerate the HTML 
@@ -169,14 +170,11 @@ export function renderOrderSummary() {
           else {
             updateQuantity(productId, newQuantity);
           }
-          document.querySelector('.js-return-to-home-link')
-              .innerHTML = calculateCartQuantity(); 
-
+          // document.querySelector('.js-return-to-home-link')
+          //     .innerHTML = calculateCartQuantity(); 
+          renderCheckoutHeader(); 
           document.querySelector(`.js-quantity-label-${productId}`)
               .innerText = newQuantity;
         });
       }); 
-
-  document.querySelector('.js-return-to-home-link')
-    .innerHTML = calculateCartQuantity(); 
 }
