@@ -153,6 +153,8 @@ export function renderOrderSummary() {
           // document.querySelector('.js-return-to-home-link')
           //     .innerHTML = calculateCartQuantity(); 
           renderCheckoutHeader(); 
+          renderOrderSummary(); 
+          renderPaymentSummary(); 
           document.querySelector(`.js-quantity-label-${productId}`)
               .innerText = newQuantity;
         });
