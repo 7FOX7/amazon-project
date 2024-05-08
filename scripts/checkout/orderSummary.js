@@ -108,7 +108,6 @@ export function renderOrderSummary() {
               // and updating the page directly with .delete(), regenerate the HTML 
               // for the order summary: 
               renderPaymentSummary(); 
-
           });
       });
 

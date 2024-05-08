@@ -15,6 +15,8 @@ export const deliveryOptions = [{
 }];
 
 export function getDeliveryOption(deliveryOptionId) {
+    // here we generate deliveryOption id (which when first launched)
+    // returns 1 by default
     let deliveryOption;
       
       deliveryOptions.forEach((option) => {
@@ -27,15 +29,46 @@ export function getDeliveryOption(deliveryOptionId) {
 }
 
 export function calculateDeliveryDate(deliveryOption) { 
-      const today = dayjs();
-      const deliveryDate = today.add(
-        deliveryOption.deliveryDays,
-        'days'
-      );
+    let today = dayjs(); 
+    function isWeekend(day) {
+      const dayOfWeek = day.day(); 
+      if(dayOfWeek === 0 || dayOfWeek === 6) {
+        return true; 
+      }
+    }
+    
+    for(let i = 0; i < deliveryOption.deliveryDays; i++) { 
+      today = today.add(1, 'day'); 
+      while(isWeekend(today)) {
+        today = today.add(1, 'day'); 
+      }
+    }
 
-      const dateString = deliveryDate.format(
-        'dddd, MMMM D'
-      ); 
+    const deliveryDate = today; 
 
-      return dateString; 
+    const dateString = deliveryDate.format(
+      'dddd, MMMM D'
+    ); 
+
+    return dateString; 
 }
+
+// function addBusinessDays(daysToAdd) {
+//   let currentDate = dayjs();
+
+//   // checks if a date is a weekend
+//   const isWeekend = (date) => {
+//     const dayOfWeek = date.day(); 
+//     return dayOfWeek === 0 || dayOfWeek === 6; 
+//   }
+
+//   // loop through the array of days to add (3, 7, 1)
+//   // and while i is less than days to add, increase day by one
+//   for(let i = 0; i < daysToAdd; i++) {
+//     currentDate.add(1, 'day'); 
+//     if(isWeekend(currentDate)) {
+//       currentDate.add(1, 'day'); 
+//     }
+//   }
+//   return currentDate; 
+// }
