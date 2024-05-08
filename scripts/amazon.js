@@ -4,55 +4,6 @@ import {formatCurrency} from './utils/money.js';
 import isSatSun from '../weekend.js'; 
 let productsHTML = '';
 
-// 15a: Using DayJS, get the date 5 days after today and display 
-// it in the format: '<Month><Day of Month>':
-const today =  dayjs(); 
-const fiveDaysFromToday = today.add(5, 'day'); 
-console.log(fiveDaysFromToday.format('<MMMM><D>' )); 
-
-// 15b: Calculate 1 month after today and display in the same format as 15a: 
-const oneMonthFromToday = today.add(1, 'month'); 
-console.log(oneMonthFromToday.format('<MMMM><D>')); 
-
-// 15c: Get a date from DayJS has a .subtract(...) method which subtracts time
-// from a date. Calculate 1 month before today and display in the same format as 15a: 
-const oneMonthBeforeToday = today.subtract(1, 'month'); 
-console.log(oneMonthBeforeToday.format('<MMMM><D>')); 
-
-// 15d: Get a date from DayJS and display it in this format: '<Day of Week>'
-// (The format should be 'Monday', 'Tuesday', etc.):
-const nameOfTodayWeek = today.format('dddd'); 
-console.log(nameOfTodayWeek); 
-
-// 15e: Create a function isWeekend(date) that takes a DayJS object, and
-// returns whether the date is 'Saturday' or 'Sunday' 
-// Hint: use solution from 15d. Test this function with a few different dates:
-
-const yesterdayDate = today.subtract(1, 'day'); 
-function _isWeekend(date) {
-    if(date === 0 || date === 6) {
-        return 'Weekend'; 
-    }
-    else {
-        return 'NOT Weekend'; 
-    }
-}
-console.log(_isWeekend(yesterdayDate.day())); 
-
-// 15f: Move is Weekend() into a separate file and use export 
-// default. Import this function in another file and run it:
-const todayDate = today.day(); 
-// console.log(isWeekend(todayDate)); 
-
-// 15h: We can also rename a default export when we import. In 15f, when we 'import isWeekend', 
-// change the name to something else like 'import isSatSun' and use this new name 
-// to run the function: 
-console.log(isSatSun(todayDate)); 
-
-
-
-
-
 // variable for 'added-to-cart'
 let timeout;
 
@@ -148,7 +99,6 @@ document.querySelectorAll('.js-add-to-cart-button')
                 .innerHTML = calculateCartQuantity();  
         });
     });
-
 
 // Update the cart quantity:
 // function updateCartQuantity() {
