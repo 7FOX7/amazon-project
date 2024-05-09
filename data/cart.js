@@ -1,20 +1,51 @@
-export let cart = JSON.parse(localStorage.getItem('cart')) 
+export let cart; 
 
-if(!cart) {
-    cart = [{
-        productId: 'ac2847e9-4444-403f-b7cf-57fde044a944',
-        quantity: 2,
-        deliveryOptionId: '1'
+loadFromStorage(); 
+
+export function loadFromStorage() {
+    cart = JSON.parse(localStorage.getItem('cart')); 
+
+    if(!cart) {
+        cart = [{
+            productId: 'ac2847e9-4444-403f-b7cf-57fde044a944',
+            quantity: 2,
+            deliveryOptionId: '1'
     }
 ]; 
-} 
-
+}
+}
 
 function saveToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-// Adds item to cart:
+// Adds item to cart: (Original)
+// export function addToCart(productId) {
+//     let matchingProduct; 
+
+//     cart.forEach((product) => {
+//         if(product.productId === productId) {
+//             matchingProduct = product;
+//         }
+//     });
+//     const cartValue = updateQuantitySelector(productId); 
+
+//     if(matchingProduct) {
+//         matchingProduct.quantity += Number(cartValue); 
+//     }
+//     //const placeholder = deliveryOptionElement.innerHTML 
+//     else {
+//         cart.push({
+//             productId, 
+//             quantity: Number(cartValue),
+//             deliveryOptionId: '1'
+//         });    
+//     }
+
+//     saveToStorage(); 
+// }
+
+// Adds item to cart: (Copy)
 export function addToCart(productId) {
     let matchingProduct; 
 
@@ -23,16 +54,16 @@ export function addToCart(productId) {
             matchingProduct = product;
         }
     });
-    const cartValue = updateQuantitySelector(productId); 
+    // const cartValue = updateQuantitySelector(productId); 
 
     if(matchingProduct) {
-        matchingProduct.quantity += Number(cartValue); 
+        matchingProduct.quantity += 1;
     }
     //const placeholder = deliveryOptionElement.innerHTML 
     else {
         cart.push({
             productId, 
-            quantity: Number(cartValue),
+            quantity: 1,
             deliveryOptionId: '1'
         });    
     }
@@ -40,6 +71,7 @@ export function addToCart(productId) {
     saveToStorage(); 
 }
 
+// DONT TOUCH BELOW
 export function removeFromCart(productId) {
     const newCart = [];
 
