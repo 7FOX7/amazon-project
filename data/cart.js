@@ -10,6 +10,10 @@ export function loadFromStorage() {
             productId: 'ac2847e9-4444-403f-b7cf-57fde044a944',
             quantity: 2,
             deliveryOptionId: '1'
+    }, {
+        productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', 
+        quantity: 3, 
+        deliveryOptionId: '2'
     }
 ]; 
 }
