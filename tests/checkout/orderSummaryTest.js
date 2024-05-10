@@ -40,6 +40,7 @@ describe('test suite: renderOrderSummary', () => {
         expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual(productName2);
         expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('Quantity: 2'); 
         expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('Quantity: 2');  
+        expect(document.querySelector(`.js-product-price`).innerText).toContain('$');
     });
 
     it('removes a product', () => {
@@ -53,5 +54,7 @@ describe('test suite: renderOrderSummary', () => {
         expect(document.querySelector(`.js-product-name-${productId1}`)).toBeNull(); 
         // data of the socks (should exists since we did not delete it):
         expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual(productName2); 
+
+        expect(document.querySelector(`.js-product-price`).innerText).toContain('$');
     });
 })
