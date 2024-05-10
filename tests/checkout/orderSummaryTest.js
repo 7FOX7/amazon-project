@@ -5,6 +5,8 @@ describe('test suite: renderOrderSummary', () => {
     const productId1 = 'ac2847e9-4444-403f-b7cf-57fde044a944';
     const productId2 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
     
+    const productName1 = 'Warrior, Programmer, Hardworker, And Just a Cool Boy To Hang Out With'; 
+    const productName2 = 'Black and Gray Athletic Cotton Socks - 6 Pairs'; 
     beforeEach(() => {
         spyOn(localStorage, 'setItem'); 
 
@@ -34,18 +36,22 @@ describe('test suite: renderOrderSummary', () => {
 
     it('displays the cart', () => {
         expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(2); 
+        expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toEqual(productName1);
+        expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual(productName2);
         expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain('Quantity: 2'); 
-        expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('Quantity: 2'); 
+        expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain('Quantity: 2');  
     });
 
     it('removes a product', () => {
-        
-
         document.querySelector(`.js-delete-link-${productId1}`).click(); 
         expect(document.querySelectorAll('.js-cart-item-container').length).toEqual(1); 
         expect(document.querySelector(`.js-cart-item-container-${productId1}`)).toEqual(null); 
         expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null); 
         expect(cart.length).toEqual(1); 
         expect(cart[0].productId).toEqual(productId2); 
+        // check if data of a warrior exists (it should not since we have deleted it):
+        expect(document.querySelector(`.js-product-name-${productId1}`)).toBeNull(); 
+        // data of the socks (should exists since we did not delete it):
+        expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toEqual(productName2); 
     });
 })
