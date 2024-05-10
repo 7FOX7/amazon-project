@@ -127,10 +127,10 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
         if(cartItem.productId === productId) {
             matchingItem = cartItem; 
         }
-        if(!matchingItem) {
-            return; 
-        }
     });
+    if(!matchingItem) {
+        return; 
+    }
     matchingItem.deliveryOptionId = deliveryOptionId;
 
     saveToStorage(); 
