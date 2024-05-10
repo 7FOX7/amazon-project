@@ -1,4 +1,4 @@
-import {addToCart, cart, loadFromStorage, removeFromCart} from '../../data/cart.js';
+import {addToCart, cart, loadFromStorage, removeFromCart, updateDeliveryOption} from '../../data/cart.js';
 
 describe('test suite: addToCart', () => {
     beforeEach(() => {
@@ -94,3 +94,35 @@ describe('test suite: removeFromCart(...)', () => {
         }]));
     }); 
 });
+
+describe('test suite: updateDeliveryOption(...)', () => {
+    const productId1 = 'ac2847e9-4444-403f-b7cf-57fde044a944';
+    beforeEach(() => {
+        spyOn(localStorage, 'setItem'); 
+    });
+
+    it('updates the delivery option of a product in the cart', () => {
+        spyOn(localStorage, 'getItem').and.callFake(() => {
+            return JSON.stringify([{
+                productId: productId1,
+                quantity: 1, 
+                deliveryOptionId: '1'
+            }]);
+        });
+
+        loadFromStorage();
+        expect(cart[0].deliveryOptionId).toEqual('1');
+        expect(updateDeliveryOption(productId1, '3'));
+        expect(cart.length).toEqual(1); 
+        expect(cart[0].deliveryOptionId).toEqual('3'); 
+        expect(localStorage.setItem).toHaveBeenCalledTimes(1); 
+
+        // after updateDeliveryOption(productId, deliveryOptionId) from the cart.js has been called, 
+        // it is saved with the 'deliveryOptionId = 3' by using the localStorage.setItem; 
+        expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
+            productId: productId1, 
+            quantity: 1, 
+            deliveryOptionId: '3'
+        }])); 
+    });
+})
