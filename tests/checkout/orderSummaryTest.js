@@ -57,4 +57,17 @@ describe('test suite: renderOrderSummary', () => {
 
         expect(document.querySelector(`.js-product-price`).innerText).toContain('$');
     });
-})
+
+    it('updates the delivery option', () => {
+        document.querySelector(`.js-delivery-option-${productId1}-3`).click(); 
+        expect(document.querySelector(`.js-delivery-option-input-${productId1}-3`).checked).toEqual(true); 
+        expect(cart.length).toEqual(2); 
+        expect(cart[0]).toEqual({
+            productId: productId1,
+            quantity: 2,
+            deliveryOptionId: '3'}
+        ); 
+        expect(document.querySelector('.js-payment-summary-shipping').innerText).toEqual('$14.98');
+        expect(document.querySelector('.js-payment-summary-total').innerText).toEqual('$22040.46');  
+    });
+});
