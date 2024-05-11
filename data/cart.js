@@ -59,16 +59,16 @@ export function addToCart(productId) {
             matchingProduct = product;
         }
     });
-    // const cartValue = updateQuantitySelector(productId); 
+    const cartValue = updateQuantitySelector(productId); 
 
     if(matchingProduct) {
-        matchingProduct.quantity += 1;
+        matchingProduct.quantity += cartValue;
     }
-    //const placeholder = deliveryOptionElement.innerHTML 
+    // const placeholder = deliveryOptionElement.innerHTML 
     else {
         cart.push({
             productId, 
-            quantity: 1,
+            quantity: Number(cartValue),
             deliveryOptionId: '1'
         });    
     }
@@ -102,15 +102,7 @@ export function updateQuantity(productId, newQuantity) {
 
     saveToStorage(); 
 }
-/*
-14e: Inside the function updateCartQuantity, we have some code 
-that calculates the cart quantity (creates a variable, loops through the cart, and
-adds up all the quantities). Notice this code is repeated in checkout.js and amazon.js
 
-1. Create a function calculateCartQuantity() and move this code into the function so we can reuse it.
-2. Put calculateCartQuantity() inside cart.js (bacause this code relates to the cart)
-and use export/import to share it between the 2 files.  
-*/
 export function calculateCartQuantity() {
     let cartQuantity = 0; 
 
