@@ -1,11 +1,13 @@
-import {addToCart, calculateCartQuantity} from '../data/cart.js';
+// import {addToCart, calculateCartQuantity} from '../data/cart.js';
+// import {addToCart, calculateCartQuantity} from '../data/cart-oop.js';
+import '../data/cart-oop.js';
 import {products} from '../data/products.js'; 
 import {formatCurrency} from './utils/money.js';
 let productsHTML = '';
 
 // variable for 'added-to-cart'
 let timeout;
-
+const cartInstance = new Object.create(cart); 
 products.forEach((product) => {
     productsHTML += `
         <div class="product-container">
@@ -92,8 +94,9 @@ document.querySelectorAll('.js-add-to-cart-button')
             const {productId} = button.dataset; 
             
             displayAddedToCartIcon(productId); 
-            addToCart(productId); 
-            // updateCartQuantity();
+            const selectorId = document.querySelector(`.js-quantity-selector-${productId}`);
+            const cartValue = selectorId.value; 
+            addToCart(productId, cartValue); 
             document.querySelector('.js-cart-quantity')
                 .innerHTML = calculateCartQuantity();  
         });
