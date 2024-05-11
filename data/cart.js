@@ -24,7 +24,7 @@ function saveToStorage() {
     localStorage.setItem('cart', JSON.stringify(cart));
 }
 
-export function addToCart(productId) {
+export function addToCart(productId, cartValue) {
     let matchingProduct; 
 
     cart.forEach((product) => {
@@ -32,10 +32,9 @@ export function addToCart(productId) {
             matchingProduct = product;
         }
     });
-    const cartValue = updateQuantitySelector(productId); 
-
+    
     if(matchingProduct) {
-        matchingProduct.quantity += cartValue;
+        matchingProduct.quantity += Number(cartValue);
     }
     // const placeholder = deliveryOptionElement.innerHTML 
     else {
