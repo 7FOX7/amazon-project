@@ -6,8 +6,7 @@ import {formatCurrency} from './utils/money.js';
 let productsHTML = '';
 
 // variable for 'added-to-cart'
-let timeout;
-const cartInstance = new Object.create(cart); 
+let timeout; 
 products.forEach((product) => {
     productsHTML += `
         <div class="product-container">
