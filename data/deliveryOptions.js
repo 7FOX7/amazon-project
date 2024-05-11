@@ -18,12 +18,11 @@ export function getDeliveryOption(deliveryOptionId) {
     // here we generate deliveryOption id (which when first launched)
     // returns 1 by default
     let deliveryOption;
-      
-      deliveryOptions.forEach((option) => {
-        if(option.id === deliveryOptionId) {
-          deliveryOption = option; 
-        }
-      });
+    deliveryOptions.forEach((option) => {
+      if(option.id === deliveryOptionId) {
+        deliveryOption = option; 
+      }
+    });
 
     return deliveryOption; 
 }
@@ -53,6 +52,16 @@ export function calculateDeliveryDate(deliveryOption) {
     return dateString; 
 }
 
+export function isValidDeliveryOptionId(deliveryOptionId) {
+  let found = false; 
+  deliveryOptions.forEach((option) => {
+    if(option.id === deliveryOptionId) {
+      found = true; 
+    }
+  });
+
+  return found;
+}
 // function addBusinessDays(daysToAdd) {
 //   let currentDate = dayjs();
 

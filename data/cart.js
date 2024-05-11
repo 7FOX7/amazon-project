@@ -1,3 +1,4 @@
+import { isValidDeliveryOptionId } from "./deliveryOptions.js";
 export let cart; 
 
 loadFromStorage(); 
@@ -122,12 +123,22 @@ export function calculateCartQuantity() {
 
 export function updateDeliveryOption(productId, deliveryOptionId) {
     let matchingItem; 
-    
+
+    // assuming we use 'isValidDeliveryOptionId()' function: 
+    // 1. if it fails (return) it should not reach localStorage.setItem(); 
+    // 2. otherwise (if it NOT return) it should reach localStorage.setItem();
+
+    // assuming we do NOT use 'isValidDeliveryOptionId()' function: 
+    // 1. it should reach localStorage.setItem() whether the deliveryOptionId is valid or invalid
+    if(!isValidDeliveryOptionId(deliveryOptionId)) {
+         return;
+    }
     cart.forEach((cartItem) => {
         if(cartItem.productId === productId) {
             matchingItem = cartItem; 
         }
     });
+
     if(!matchingItem) {
         return; 
     }
