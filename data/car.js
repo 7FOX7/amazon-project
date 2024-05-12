@@ -129,14 +129,14 @@ car2.displayInfo();
 */
 
 export class Car {
-    brand; 
-    model; 
+    #brand; 
+    #model; 
     speed; 
     isTrunkOpen; 
 
     constructor(carDetails) {
-        this.brand = carDetails.brand; 
-        this.model = carDetails.model; 
+        this.#brand = carDetails.brand; 
+        this.#model = carDetails.model; 
         this.speed = 0; 
         this.isTrunkOpen = false; 
     }
@@ -173,7 +173,7 @@ export class Car {
     }
 
     displayInfo() {
-        console.log(`${this.brand} ${this.model} Speed: ${this.speed} km/h
+        console.log(`${this.#brand} ${this.#model} Speed: ${this.speed} km/h
         
         Trunk is open: ${this.isTrunkOpen}`); 
     }
@@ -181,7 +181,7 @@ export class Car {
 
 const car1 = new Car({
     brand: 'Toyota', 
-    model: 'Corrola'
+    model: 'Corrolla'
 }); 
 
 const car2 = new Car({
