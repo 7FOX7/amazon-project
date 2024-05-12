@@ -24,6 +24,7 @@ class Product {
   rating;
   priceCents;
 
+  // productDetails represent products[...]
   constructor(productDetails) {
     this.id = productDetails.id;
     this.image = productDetails.image; 
@@ -33,7 +34,7 @@ class Product {
   }
 
   getStarsUrl() {
-    return `images/ratings/rating-${product.rating.stars * 10}.png`;
+    return `images/ratings/rating-${products.rating.stars * 10}.png`;
   }
 
   getPrice() {
@@ -61,36 +62,33 @@ class Clothing extends Product {
     `;
   }
 }
-/*
-const date = new Date();
-console.log(date); 
-console.log(date.toLocaleTimeString());
 
+class Appliance extends Product {
+  instructionsLink; 
+  warrantyLink; 
 
-console.log(this);
+  constructor(productDetails) {
+    super(productDetails); 
 
-const object2 = {
-  a: 2, 
-  b: this.a
-};
-*/
-
-/*
-function logThis() {
-  console.log(this);
-}
-logThis(); 
-logThis.call('hello'); 
-
-
-const object3 = {
-  method: () => {
-    console.log(this);
+    // IMPORTANT: you were trying to assign 'this.instructionsLink' to the productDetails.instructionsLinK, 
+    // however, in the 'products' (which is represented by the productDetails) there is no 'instructionsLinK' 
+    // but 'instructionsLink'
+    this.instructionsLink = productDetails.instructionsLink;
+    this.warrantyLink = productDetails.warrantyLink; 
   }
-};
 
-object3.method(); 
-*/
+  extraInfoHTML() {
+    return `
+      <a href="${this.instructionsLink}" target="_blank">
+        Instructions
+      </a>
+      
+      <a href="${this.warrantyLink}" target="_blank">
+        Warranty
+      </a>
+    `
+  }
+}
 
 export const products = [
   {
@@ -152,7 +150,10 @@ export const products = [
       "toaster",
       "kitchen",
       "appliances"
-    ]
+    ], 
+    type: "electronic",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "3ebe75dc-64d2-4137-8860-1f5a963e534b",
@@ -337,7 +338,10 @@ export const products = [
       "water boiler",
       "appliances",
       "kitchen"
-    ]
+    ],
+    type: "electronic",
+    instructionsLink: "images/appliance-instructions.png", 
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "6b07d4e7-f540-454e-8a1e-363f25dbae7d",
@@ -642,7 +646,10 @@ export const products = [
       "coffeemakers",
       "kitchen",
       "appliances"
-    ]
+    ],
+    type: "electronic", 
+    instructionsLink: "images/appliance-instructions.png", 
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "02e3a47e-dd68-467e-9f71-8bf6f723fdae",
@@ -702,7 +709,10 @@ export const products = [
       "food blenders",
       "kitchen",
       "appliances"
-    ]
+    ], 
+    type: "electronic",
+    instructionsLink: "images/appliance-instructions.png",
+    warrantyLink: "images/appliance-warranty.png"
   },
   {
     id: "36c64692-677f-4f58-b5ec-0dc2cf109e27",
@@ -793,5 +803,43 @@ export const products = [
   if(productDetails.type === 'clothing') {
     return new Clothing(productDetails); 
   }
-  return new Product(productDetails);
+  if(productDetails.type === 'electronic') {
+    return new Appliance(productDetails); 
+  }
+  // if(productDetails.type === '') {
+  //   return new Product(productDetails);
+  // }
+
+  return new Product(productDetails); 
 });
+
+/*
+const date = new Date();
+console.log(date); 
+console.log(date.toLocaleTimeString());
+
+
+console.log(this);
+
+const object2 = {
+  a: 2, 
+  b: this.a
+};
+*/
+
+/*
+function logThis() {
+  console.log(this);
+}
+logThis(); 
+logThis.call('hello'); 
+
+
+const object3 = {
+  method: () => {
+    console.log(this);
+  }
+};
+
+object3.method(); 
+*/
