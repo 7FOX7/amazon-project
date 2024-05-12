@@ -17,7 +17,7 @@ export function getProduct(productId) {
   return matchingProduct; 
 }
 
-class Product {
+export class Product {
   id;
   image; 
   name;
@@ -34,7 +34,7 @@ class Product {
   }
 
   getStarsUrl() {
-    return `images/ratings/rating-${products.rating.stars * 10}.png`;
+    return `images/ratings/rating-${this.rating.stars * 10}.png`;
   }
 
   getPrice() {
@@ -46,7 +46,7 @@ class Product {
   }
 }
 
-class Clothing extends Product {
+export class Clothing extends Product {
   sizeChartLink;
 
   constructor(productDetails) {
@@ -63,7 +63,7 @@ class Clothing extends Product {
   }
 }
 
-class Appliance extends Product {
+export class Appliance extends Product {
   instructionsLink; 
   warrantyLink; 
 
