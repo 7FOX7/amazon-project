@@ -203,9 +203,12 @@ car2.displayInfo();
 
 class RaceCar extends Car {
     accelaration; 
-
+    #brand; 
+    #model; 
     constructor(raceCarDetails) {
-        super(raceCarDetails); 
+        super(raceCarDetails);
+        this.#brand = raceCarDetails.brand; 
+        this.#model = raceCarDetails.model;  
         this.accelaration = raceCarDetails.accelaration;
     }
 
@@ -225,7 +228,7 @@ class RaceCar extends Car {
     }
 
     displayInfo() {
-        console.log(`${this.brand}, ${this.model}, ${this.accelaration}, 
+        console.log(`${this.#brand}, ${this.#model}, ${this.accelaration}, 
         
         Speed: ${this.speed}`)
     }
