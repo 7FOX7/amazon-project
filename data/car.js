@@ -197,3 +197,62 @@ car2.go();
 car2.brake(); 
 car2.openTrunk(); 
 car2.displayInfo(); 
+
+
+// Inherited class: 
+
+class RaceCar extends Car {
+    accelaration; 
+
+    constructor(raceCarDetails) {
+        super(raceCarDetails); 
+        this.accelaration = raceCarDetails.accelaration;
+    }
+
+    go() {
+        this.speed += this.accelaration; 
+        if(this.speed > 300) {
+            this.speed = 300; 
+        }
+    }
+
+    openTrunk() {
+        console.log('Race car does not have a trunk'); 
+    }
+
+    closeTrunk() {
+        console.log('Race car does not have a trunk'); 
+    }
+
+    displayInfo() {
+        console.log(`${this.brand}, ${this.model}, ${this.accelaration}, 
+        
+        Speed: ${this.speed}`)
+    }
+}
+
+const raceCar = new RaceCar({
+    brand: 'McLaren', 
+    model: 'F1', 
+    accelaration: 20
+});
+
+raceCar.go(); 
+raceCar.go(); 
+raceCar.go(); 
+raceCar.go(); 
+raceCar.go(); 
+
+raceCar.go(); 
+raceCar.go(); 
+raceCar.go(); 
+raceCar.go(); 
+raceCar.go(); 
+
+raceCar.go(); 
+raceCar.go(); 
+
+
+raceCar.displayInfo(); 
+raceCar.openTrunk(); 
+raceCar.closeTrunk(); 
