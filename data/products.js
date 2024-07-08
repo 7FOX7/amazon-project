@@ -1,18 +1,9 @@
 import {formatCurrency} from '../scripts/utils/money.js';
 
 export function getProduct(productId) {
-  let matchingProduct; 
-
-      // We loop through each product inside 
-      // 'products' array: 
-      products.forEach((product) => {
-          // if any product from the array has the same id
-          // as the product from the cart, then assign a variable
-          // matching product to that product. 
-          if(product.id === productId) {
-              matchingProduct = product; 
-          }
-      });
+  const matchingProduct = products.find((product) => {
+    return product.id === productId
+  })
 
   return matchingProduct; 
 }
@@ -767,23 +758,6 @@ export const products = [
   // 2. For the id, use any id that you want.
   // 3. For the image, take any from the "images/products..." path
   // 4. For the name, rating, and priceCents, use any values that you want. 
-  {
-    id: "ac2847e9-4444-403f-b7cf-57fde044a944",
-    image: "images/products/super-puper-boy.jpg",
-    name: "Warrior, Programmer, Hardworker, And Just a Cool Boy To Hang Out With",
-    rating: {
-      stars: 5, 
-      count: 5344
-    },
-    priceCents: 1000000,
-    keywords: [
-      "super",
-      "programmer", 
-      "boy", 
-      "mind",
-      "puper"
-    ]
-  },
   {
     id: "cc2847e9-4444-403f-b7cf-57fde044a955",
     image: "images/products/backpack.jpg",
