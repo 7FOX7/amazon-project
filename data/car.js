@@ -128,134 +128,134 @@ car1.displayInfo();
 car2.displayInfo(); 
 */
 
-export class Car {
-    #brand; 
-    #model; 
-    speed; 
-    isTrunkOpen; 
+// export class Car {
+//     #brand; 
+//     #model; 
+//     speed; 
+//     isTrunkOpen; 
 
-    constructor(carDetails) {
-        this.#brand = carDetails.brand; 
-        this.#model = carDetails.model; 
-        this.speed = 0; 
-        this.isTrunkOpen = false; 
-    }
+//     constructor(carDetails) {
+//         this.#brand = carDetails.brand; 
+//         this.#model = carDetails.model; 
+//         this.speed = 0; 
+//         this.isTrunkOpen = false; 
+//     }
 
-    go() {
-        if(this.isTrunkOpen === false && this.speed < 200) {
-            this.speed += 5; 
-        }
-        else {
-            this.speed; 
-        }
-    }
+//     go() {
+//         if(this.isTrunkOpen === false && this.speed < 200) {
+//             this.speed += 5; 
+//         }
+//         else {
+//             this.speed; 
+//         }
+//     }
 
-    brake() {
-        this.speed = this.speed >= 5 ? this.speed -= 5 : this.speed;     
-    }
+//     brake() {
+//         this.speed = this.speed >= 5 ? this.speed -= 5 : this.speed;     
+//     }
 
-    openTrunk() {
-        if(this.speed === 0) {
-            this.isTrunkOpen = true; 
-        } 
-    }
+//     openTrunk() {
+//         if(this.speed === 0) {
+//             this.isTrunkOpen = true; 
+//         } 
+//     }
 
-    closeTrunk() {
-        this.isTrunkOpen = false; 
-    }
+//     closeTrunk() {
+//         this.isTrunkOpen = false; 
+//     }
 
-    getSpeed() {
-        return this.speed; 
-    }
+//     getSpeed() {
+//         return this.speed; 
+//     }
 
-    getTrunk() {
-        return this.isTrunkOpen; 
-    }
+//     getTrunk() {
+//         return this.isTrunkOpen; 
+//     }
 
-    displayInfo() {
-        console.log(`${this.#brand} ${this.#model} Speed: ${this.speed} km/h
+//     displayInfo() {
+//         console.log(`${this.#brand} ${this.#model} Speed: ${this.speed} km/h
         
-        Trunk is open: ${this.isTrunkOpen}`); 
-    }
-}
+//         Trunk is open: ${this.isTrunkOpen}`); 
+//     }
+// }
 
-const car1 = new Car({
-    brand: 'Toyota', 
-    model: 'Corrolla'
-}); 
+// const car1 = new Car({
+//     brand: 'Toyota', 
+//     model: 'Corrolla'
+// }); 
 
-const car2 = new Car({
-    brand: 'Tesla', 
-    model: 'Model 3'
-}); 
+// const car2 = new Car({
+//     brand: 'Tesla', 
+//     model: 'Model 3'
+// }); 
 
-car1.go(); 
-car1.openTrunk(); 
-car1.displayInfo(); 
+// car1.go(); 
+// car1.openTrunk(); 
+// car1.displayInfo(); 
 
-car2.go(); 
-car2.brake(); 
-car2.openTrunk(); 
-car2.displayInfo(); 
+// car2.go(); 
+// car2.brake(); 
+// car2.openTrunk(); 
+// car2.displayInfo(); 
 
 
-// Inherited class: 
+// // Inherited class: 
 
-class RaceCar extends Car {
-    accelaration; 
-    #brand; 
-    #model; 
-    constructor(raceCarDetails) {
-        super(raceCarDetails);
-        this.#brand = raceCarDetails.brand; 
-        this.#model = raceCarDetails.model;  
-        this.accelaration = raceCarDetails.accelaration;
-    }
+// class RaceCar extends Car {
+//     accelaration; 
+//     #brand; 
+//     #model; 
+//     constructor(raceCarDetails) {
+//         super(raceCarDetails);
+//         this.#brand = raceCarDetails.brand; 
+//         this.#model = raceCarDetails.model;  
+//         this.accelaration = raceCarDetails.accelaration;
+//     }
 
-    go() {
-        this.speed += this.accelaration; 
-        if(this.speed > 300) {
-            this.speed = 300; 
-        }
-    }
+//     go() {
+//         this.speed += this.accelaration; 
+//         if(this.speed > 300) {
+//             this.speed = 300; 
+//         }
+//     }
 
-    openTrunk() {
-        console.log('Race car does not have a trunk'); 
-    }
+//     openTrunk() {
+//         console.log('Race car does not have a trunk'); 
+//     }
 
-    closeTrunk() {
-        console.log('Race car does not have a trunk'); 
-    }
+//     closeTrunk() {
+//         console.log('Race car does not have a trunk'); 
+//     }
 
-    displayInfo() {
-        console.log(`${this.#brand}, ${this.#model}, ${this.accelaration}, 
+//     displayInfo() {
+//         console.log(`${this.#brand}, ${this.#model}, ${this.accelaration}, 
         
-        Speed: ${this.speed}`)
-    }
-}
+//         Speed: ${this.speed}`)
+//     }
+// }
 
-const raceCar = new RaceCar({
-    brand: 'McLaren', 
-    model: 'F1', 
-    accelaration: 20
-});
+// const raceCar = new RaceCar({
+//     brand: 'McLaren', 
+//     model: 'F1', 
+//     accelaration: 20
+// });
 
-raceCar.go(); 
-raceCar.go(); 
-raceCar.go(); 
-raceCar.go(); 
-raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
 
-raceCar.go(); 
-raceCar.go(); 
-raceCar.go(); 
-raceCar.go(); 
-raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
 
-raceCar.go(); 
-raceCar.go(); 
+// raceCar.go(); 
+// raceCar.go(); 
 
 
-raceCar.displayInfo(); 
-raceCar.openTrunk(); 
-raceCar.closeTrunk(); 
+// raceCar.displayInfo(); 
+// raceCar.openTrunk(); 
+// raceCar.closeTrunk(); 
