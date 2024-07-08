@@ -15,7 +15,6 @@ export class Product {
   rating;
   priceCents;
 
-  // productDetails represent products[...]
   constructor(productDetails) {
     this.id = productDetails.id;
     this.image = productDetails.image; 
@@ -60,10 +59,6 @@ export class Appliance extends Product {
 
   constructor(productDetails) {
     super(productDetails); 
-
-    // IMPORTANT: you were trying to assign 'this.instructionsLink' to the productDetails.instructionsLinK, 
-    // however, in the 'products' (which is represented by the productDetails) there is no 'instructionsLinK' 
-    // but 'instructionsLink'
     this.instructionsLink = productDetails.instructionsLink;
     this.warrantyLink = productDetails.warrantyLink; 
   }
@@ -780,40 +775,5 @@ export const products = [
   if(productDetails.type === 'electronic') {
     return new Appliance(productDetails); 
   }
-  // if(productDetails.type === '') {
-  //   return new Product(productDetails);
-  // }
-
   return new Product(productDetails); 
 });
-
-/*
-const date = new Date();
-console.log(date); 
-console.log(date.toLocaleTimeString());
-
-
-console.log(this);
-
-const object2 = {
-  a: 2, 
-  b: this.a
-};
-*/
-
-/*
-function logThis() {
-  console.log(this);
-}
-logThis(); 
-logThis.call('hello'); 
-
-
-const object3 = {
-  method: () => {
-    console.log(this);
-  }
-};
-
-object3.method(); 
-*/

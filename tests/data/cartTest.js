@@ -154,30 +154,6 @@ describe('test suite: updateDeliveryOption(...)', () => {
         }])); 
     }); 
    
-    // it('Updates the cart even when invalid deliveryOptionId is passed', () => {
-    //     spyOn(localStorage, 'getItem').and.callFake(() => {
-    //         return JSON.stringify([{
-    //             productId: productId1, 
-    //             quantity: 2, 
-    //             deliveryOptionId: '2'
-    //         }]);
-    //     });
-
-    //     loadFromStorage(); 
-
-    //     // using without 'isValidDeliveryOptionId(...)'. Here it reaches localStorage.setItem even 
-    //     // if we pass invalid deliveryOptionId like 4, 5, 10 (that is not within deliveryOption array):  
-    //     expect(cart.length).toEqual(1); 
-    //     expect(cart[0].deliveryOptionId).toEqual('2'); 
-    //     expect(updateDeliveryOption(productId1, '10')); 
-    //     expect(localStorage.setItem).toHaveBeenCalledTimes(1); 
-    //     expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
-    //         productId: productId1, 
-    //         quantity: 2, 
-    //         deliveryOptionId: '10'
-    //     }])); 
-    // });
-    
     it('Does NOT update the cart when the invalid deliveryOptionId is passed', () => {
         spyOn(localStorage, 'getItem').and.callFake(() => {
             return JSON.stringify([{
@@ -188,16 +164,9 @@ describe('test suite: updateDeliveryOption(...)', () => {
         });
 
         loadFromStorage(); 
-        // using 'isValidDeliveryOptionId(...)'. Here it does not reach localStorage.setItem 
-        // if we pass invalid deliveryOptionId like 4, 5, 10 (it just returns):
         expect(cart.length).toEqual(1); 
         expect(cart[0].deliveryOptionId).toEqual('2'); 
         expect(updateDeliveryOption(productId1, '10')); 
         expect(localStorage.setItem).toHaveBeenCalledTimes(0);
-        // expect(localStorage.setItem).toHaveBeenCalledWith('cart', JSON.stringify([{
-        //     productId: productId1, 
-        //     quantity: 2, 
-        //     deliveryOptionId: '10'
-        // }])); 
     })
 })

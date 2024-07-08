@@ -18,8 +18,6 @@ describe('test suite: Product {...}', () => {
                 "apparel"
             ]
         });
-
-        // spyOn(product, 'getStarsUrl').and.callThrough(); 
     });
 
     it('has the correct properties', () => {

@@ -1,10 +1,7 @@
 import {addToCart, calculateCartQuantity} from '../data/cart.js';
-// import {addToCart, calculateCartQuantity} from '../data/cart-oop.js';
-//import '../data/cart-oop.js';
 import {products} from '../data/products.js'; 
 let productsHTML = '';
 
-// variable for 'added-to-cart'
 let timeout; 
 products.forEach((product) => {
     productsHTML += `
@@ -61,7 +58,6 @@ products.forEach((product) => {
   `;
 });
 
-// updateCartQuantity(); 
 document.querySelector('.js-cart-quantity')
     .innerHTML = calculateCartQuantity(); 
 

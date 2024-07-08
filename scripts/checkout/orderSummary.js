@@ -99,10 +99,6 @@ export function renderOrderSummary() {
           link.addEventListener('click', () => {
               const productId = link.dataset.productId;
               removeFromCart(productId); 
-
-              
-              // document.querySelector('.js-return-to-home-link')
-              //   .innerHTML = calculateCartQuantity(); 
               renderCheckoutHeader(); 
               renderOrderSummary(); 
               // 15h: When deleting a product from the cart, instead of using the DOM
@@ -114,9 +110,7 @@ export function renderOrderSummary() {
 
   document.querySelectorAll('.js-delivery-option')
       .forEach((element) => {
-        element.addEventListener('click', () => {
-          // const productId = element.dataset; 
-          // const deliveryOptionId = element.dataset; 
+        element.addEventListener('click', () => { 
           const {productId, deliveryOptionId} = element.dataset; 
           updateDeliveryOption(productId, deliveryOptionId);
           renderOrderSummary(); 
